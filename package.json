@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "@adonisjs/core": "^5.8.0",
+    "@adonisjs/lucid": "^18.4.2",
     "@adonisjs/repl": "^3.1.0",
     "@adonisjs/session": "^6.2.0",
     "@adonisjs/shield": "^7.0.0",
@@ -72,9 +73,11 @@
     "dompurify": "^3.0.6",
     "htmx.org": "^1.9.9",
     "jsdom": "^23.0.1",
+    "luxon": "^3.4.4",
     "marked": "^11.1.0",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.2.0",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "sqlite3": "^5.1.6"
   }
 }

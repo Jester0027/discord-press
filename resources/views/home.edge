@@ -2,5 +2,19 @@
 @set('title', 'Home')
 
 @section('body')
-  <p>Hello world</p>
+  @each((post, index) in posts)
+    <a hx-boost="true" href="/{{post.d_snowflake}}">
+      <strong>{{post.d_name}}</strong>
+      <footer>
+        <small>{{post.d_author_name}}</small>
+      </footer>
+    </a>
+    @if(index !== posts.length - 1)
+      <hr/>
+    @end
+  @end
+
+  @if(posts.length === 0)
+    <p>It's empty here !</p>
+  @end
 @end

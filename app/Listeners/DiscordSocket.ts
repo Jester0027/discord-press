@@ -1,5 +1,6 @@
 import type { EventsList } from '@ioc:Adonis/Core/Event'
 import Logger from '@ioc:Adonis/Core/Logger'
+import Database from '@ioc:Adonis/Lucid/Database'
 import { marked } from 'marked'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
@@ -11,8 +12,18 @@ export default class DiscordSocket {
 
   // @ts-ignore
   public async onThreadCreated([thread, newThread]: EventsList['discord:thread:created']) {
-    // const initialMessage = await thread.fetchStarterMessage()
-    // const html = await this.#parseMarkdown(initialMessage?.content)
+    const initialMessage = await thread.fetchStarterMessage()
+    const html = await this.#parseMarkdown(initialMessage?.content)
+    await Database.insertQuery()
+      .table('posts')
+      .insert({
+        d_snowflake: initialMessage?.id.toString(),
+        d_name: thread.name,
+        d_content: initialMessage?.content,
+        d_content_html: html,
+        d_author_name: initialMessage?.author.displayName,
+        d_initial_message_data: JSON.stringify(initialMessage),
+      })
     Logger.info('Thread created')
   }
 
