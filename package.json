@@ -53,7 +53,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "pino-pretty": "^10.2.3",
     "prettier": "^3.1.1",
-    "typescript": "~4.6",
+    "typescript": "5.3.3",
     "webpack": "^5.72",
     "webpack-cli": "^4.9.1",
     "youch": "^3.3.3",
