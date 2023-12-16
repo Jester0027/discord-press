@@ -1,8 +1,12 @@
-<nav>
-  <ul>
-    <li hx-boost="true">
+<nav aria-label="breadcrumb" style="padding-inline: 1rem">
+  <ul hx-boost="true">
+    <li>
       <a href="/">Home</a>
-      <a href="/about">About</a>
     </li>
+    @if(postTitle)
+    <li>
+      {{postTitle}}
+    </li>
+    @end
   </ul>
 </nav>

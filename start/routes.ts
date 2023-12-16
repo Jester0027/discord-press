@@ -19,6 +19,33 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Database from '@ioc:Adonis/Lucid/Database'
 
-Route.get('/', async ({ view }) => view.render('home'))
-Route.get('/about', async ({ view }) => view.render('about'))
+export type Post = {
+  d_snowflake: string
+  d_name: string
+  d_content_html: string
+  d_author_name: string
+  created_at: string
+}
+
+Route.get('/', async ({ view }) => {
+  const posts = await Database.query<
+    Pick<Post, 'd_snowflake' | 'd_name' | 'd_author_name' | 'created_at'>[]
+  >()
+    .from('posts')
+    .select('d_snowflake', 'd_name', 'd_author_name', 'created_at')
+    .orderBy('created_at', 'asc')
+  return view.render('home', { posts })
+})
+
+Route.get('/:id', async ({ view, params: { id } }) => {
+  const post = await Database.query<
+    Pick<Post, 'd_snowflake' | 'd_name' | 'd_content_html' | 'd_author_name' | 'created_at'>
+  >()
+    .from('posts')
+    .select('d_snowflake', 'd_name', 'd_content_html', 'd_author_name', 'created_at')
+    .where('d_snowflake', id)
+    .first()
+  return view.render('post', { post })
+})

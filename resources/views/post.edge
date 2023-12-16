@@ -1,0 +1,10 @@
+@layout('layouts/base')
+@set('title', post.d_name)
+@set('postTitle', post.d_name)
+
+@section('body')
+  <p><strong>{{post.d_name}}</strong></p>
+  <i>by {{ post.d_author_name }}</i>
+  <hr/>
+  <div class="post_content">{{{post.d_content_html}}}</div>
+@end
